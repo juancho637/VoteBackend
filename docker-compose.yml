@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  mysql:
+    image: mysql
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: vote
+      MYSQL_ROOT_PASSWORD: secret
+  web:
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - mysql
